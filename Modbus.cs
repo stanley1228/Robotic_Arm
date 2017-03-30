@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- 
+ 123
  Modbus - Free .NET Modbus Library
  
  Author  : Simone Assunti
@@ -568,7 +568,7 @@ namespace Modbus
     public abstract class ModbusMaster : ModbusBase
     {
         #region Global variables
-
+        int errorcount = 0;//stanley1
         /// <summary>
         /// Remote host connection status
         /// </summary>
@@ -995,8 +995,16 @@ namespace Modbus
             if (error != Errors.NO_ERROR)
                 return null;
             List<ushort> ret = new List<ushort>();
-            for (int ii = 0; ii < receive_buffer[1]; ii += 2)
-                ret.Add(ToUInt16(receive_buffer.ToArray(), ii + 2));
+
+            try //stanley  因為在寫入值到Slave之後，這邊有可能會出現收錯資料，導致ToUInt16 出錯，像是他要第4,5byte合成word但是少了第5byte，會出現Index超過
+            {
+                for (int ii = 0; ii < receive_buffer[1]; ii += 2)
+                    ret.Add(ToUInt16(receive_buffer.ToArray(), ii + 2));
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+                return null;
+            }
             return ret.ToArray();
         }
 
@@ -1020,13 +1028,18 @@ namespace Modbus
                 return null;
             }
             ushort msg_len = 6;
+           
             InitTCPUDPMasterMessage();
             send_buffer.Add((byte)ModbusCodes.READ_INPUT_REGISTERS);
             send_buffer.AddRange(GetBytes(start_address));
             send_buffer.AddRange(GetBytes(len));
             Query(unit_id, msg_len);
+            errorcount++;//stanley
             if (error != Errors.NO_ERROR)
+            {
+                errorcount=0;//stanley
                 return null;
+            }
             List<ushort> ret = new List<ushort>();
             for (int ii = 0; ii < receive_buffer[1]; ii += 2)
                 ret.Add(ToUInt16(receive_buffer.ToArray(), ii + 2));
