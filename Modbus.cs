@@ -1,5 +1,4 @@
 ﻿/****************************************************************************
- 123
  Modbus - Free .NET Modbus Library
  
  Author  : Simone Assunti
@@ -568,7 +567,10 @@ namespace Modbus
     public abstract class ModbusMaster : ModbusBase
     {
         #region Global variables
-        int errorcount = 0;//stanley1
+        
+        int errorcount = 0;//stanley
+
+       
         /// <summary>
         /// Remote host connection status
         /// </summary>
