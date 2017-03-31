@@ -33,13 +33,50 @@ namespace RobotArmControl
         }
         enum eOPMode
         {
-            JOG,
+            JOG=0,
             P2P,
             SEWING,
-            LINE
+            LINE,
+            IDLE
         }
 
+        
+        enum eMbData
+        {
+	        DEF_INX_TARGET_POSX=0,
+	        DEF_INX_TARGET_POSY,
+	        DEF_INX_TARGET_POSZ,
+	        DEF_INX_OPMODE,
+	        DEF_INX_SPPED_RATIO_L,
+	        DEF_INX_SPPED_RATIO_H,
 
+	        DEF_INX_TARPOS1=6,
+	        DEF_INX_TARPOS2,
+	        DEF_INX_TARPOS3,
+	        DEF_INX_TARPOS4,
+	        DEF_INX_TARPOS5,
+	        DEF_INX_TARPOS6,
+	        DEF_INX_TARPOS7,
+
+	        DEF_INX_POSVAL1=13,
+	        DEF_INX_POSVAL2,
+	        DEF_INX_POSVAL3,
+	        DEF_INX_POSVAL4,
+	        DEF_INX_POSVAL5,
+	        DEF_INX_POSVAL6,
+	        DEF_INX_POSVAL7,
+
+	        DEF_INX_VELVAL1=20,
+	        DEF_INX_VELVAL2,
+	        DEF_INX_VELVAL3,
+	        DEF_INX_VELVAL4,
+	        DEF_INX_VELVAL5,
+	        DEF_INX_VELVAL6,
+	        DEF_INX_VELVAL7,
+
+	        DEF_INX_ERR_STATUS,
+	        DEF_INX_STATE
+        };
 
         //==
         //Modbus struct
@@ -211,15 +248,32 @@ namespace RobotArmControl
         }
 
 
-        public void AxisMoveToPos(byte unit_id, ushort axis, ushort pos)
+        public void Action_Jog(byte unit_id, ushort axis, ushort pos)
         {
             if (axis > DEF_MAX_AXIS)
                 return;
 
-            ushort address = Convert.ToUInt16(4005 + axis);
-            //mm.WriteSingleRegister(unit_id, address, pos);
-            mm.WriteSingleRegister(unit_id, address, pos);//
+            ushort address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_TARPOS1 + axis-1);
+            mm.WriteSingleRegister(unit_id, address, pos);
+            
+            Thread.Sleep(10);
 
+            address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_OPMODE);
+            mm.WriteSingleRegister(unit_id, address, Convert.ToUInt16(eOPMode.JOG));
+        }
+
+        public void Action_P2P(byte unit_id, ushort x, ushort y, ushort z)
+        {
+            ushort []values = {x,y,z};
+            ushort address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_TARGET_POSX);
+             
+            mm.WriteMultipleRegisters(unit_id, address, values);
+            
+
+            Thread.Sleep(10);
+
+            address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_OPMODE);
+            mm.WriteSingleRegister(unit_id, address, Convert.ToUInt16(eOPMode.P2P));
         }
 
         public void TestThreadFun()
