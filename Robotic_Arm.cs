@@ -1,4 +1,6 @@
-﻿using System;
+﻿//1.缺alpha beta gamma
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,9 +77,9 @@ namespace Robotic_Arm
 
         private void Robotix_Arm_Load(object sender, EventArgs e)
         {
-            txb_TargetPosX.Text="50";
-            txb_TargetPosY.Text="60";
-            txb_TargetPosZ.Text="70";
+            txb_TargetPosX.Text="60";
+            txb_TargetPosY.Text="0";
+            txb_TargetPosZ.Text="0";
             txb_SpeedRatio.Text = "0.5";
 
             //Add OP mode combox item
@@ -134,14 +136,33 @@ namespace Robotic_Arm
 
                 if (count < 500)
                 {
-                    ModBusData.AxisMoveToPos(unit_id, axis, pos); //可能在送的時候會同時收會發生相撞
+                    ModBusData.Action_Jog(unit_id, axis, pos); //可能在送的時候會同時收會發生相撞
                     Thread.Sleep(10);//stanley沒加delay會無法寫
                 }
                 ModBusData.ResumeModbusMasterThread();
 
-               
             }
+            else if (cbx_OPMode.Text == "P2P")
+            {
+                short x = 0, y = 0, z = 0;
+                x = Convert.ToInt16(txb_TargetPosX.Text);
+                y = Convert.ToInt16(txb_TargetPosY.Text);
+                z = Convert.ToInt16(txb_TargetPosZ.Text);
 
+                ModBusData.PauseModbusMasterThread();
+                int count = 0;
+                while ((ModBusData.Th_mb_ReadDone == true) && (count < 500))
+                {
+                    count++;
+                    Thread.Sleep(1);
+                }
+
+                if (count < 500)
+                {
+                    ModBusData.Action_P2P(unit_id, (ushort)x, (ushort)y,(ushort)z); //可能在送的時候會同時收會發生相撞
+                    Thread.Sleep(10);//stanley沒加delay會無法寫
+                }
+            }
                 
         }
         private void Dis_Timer_Fun(object sender, EventArgs e)
@@ -180,16 +201,16 @@ namespace Robotic_Arm
 
 
             //txb_TargetPosX.Text = ModBusData.TargetPosX.ToString();
-            txb_TargetPosY.Text = ModBusData.TargetPosY.ToString();
-            txb_TargetPosZ.Text = ModBusData.TargetPosZ.ToString();
-            cbx_OPMode.SelectedIndex = ModBusData.OPMode;
-            txb_SpeedRatio.Text = ModBusData.SpeedRatio.ToString();
+            //txb_TargetPosY.Text = ModBusData.TargetPosY.ToString();
+            //txb_TargetPosZ.Text = ModBusData.TargetPosZ.ToString();
+            //cbx_OPMode.SelectedIndex = ModBusData.OPMode;
+            //txb_SpeedRatio.Text = ModBusData.SpeedRatio.ToString();
 
-            txb_TargetPosX.Text = String.Format("{0}", ModBusData.TargetPosX);
-            txb_TargetPosY.Text = String.Format("{0}", ModBusData.TargetPosY);
-            txb_TargetPosZ.Text = String.Format("{0}", ModBusData.TargetPosZ);
-            cbx_OPMode.SelectedIndex = ModBusData.OPMode;
-            txb_TargetPosZ.Text = String.Format("{0:0.000}", ModBusData.SpeedRatio);
+            //txb_TargetPosX.Text = String.Format("{0}", ModBusData.TargetPosX);
+            //txb_TargetPosY.Text = String.Format("{0}", ModBusData.TargetPosY);
+            //txb_TargetPosZ.Text = String.Format("{0}", ModBusData.TargetPosZ);
+            //cbx_OPMode.SelectedIndex = ModBusData.OPMode;
+            txb_SpeedRatio.Text = String.Format("{0:0.000}", ModBusData.SpeedRatio);
         }
 
         private void threadtest()
