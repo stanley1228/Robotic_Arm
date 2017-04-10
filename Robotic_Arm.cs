@@ -90,7 +90,6 @@ namespace Robotic_Arm
             cbx_OPMode.SelectedIndex = 0;
 
 
-           
             //Add JOG axis combox item
             String[] AxisSel=new String[]{"Axis1","Axis2","Axis3","Axis4","Axis5","Axis6","Axis7"};
             foreach (String str2 in AxisSel)
@@ -106,9 +105,28 @@ namespace Robotic_Arm
             Dis_Timer.Tick += new EventHandler(Dis_Timer_Fun);
             Dis_Timer.Start();
 
+            //Initail Target pos Value
+            TextBox[] tar_pos = new TextBox[] { textBox16, textBox17, textBox18, textBox19, textBox20, textBox21, textBox22 };
+            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
+            {
+                //txb_Vel[i].Text = String.Format("0x{0:X}", ModBusData.VelValue[i]);
+                tar_pos[i].Text = String.Format("{0}", 0);
+            }
+            tar_pos[4].Text = String.Format("{0}", 100);
+            tar_pos[5].Text = String.Format("{0}", 200);
+            tar_pos[6].Text = String.Format("{0}", 300);
+
+
+            //Initail Target pos Value
+            TextBox[] text_tar_vel = new TextBox[] { textBox8, textBox9, textBox10, textBox11, textBox12, textBox13, textBox14 };
+            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)               
+                text_tar_vel[i].Text = String.Format("{0}", 10);
+         
+
+
 
             //start Modbus master thread
-            ModBusData.StartModbusMasterThread();
+            //ModBusData.StartModbusMasterThread();
            
 
         }
@@ -126,7 +144,7 @@ namespace Robotic_Arm
                 axis = Convert.ToUInt16(cbx_JOGAXIS.SelectedIndex + 1);
                 pos = Convert.ToUInt16(textBox15.Text);
 
-                ModBusData.PauseModbusMasterThread(); 
+               // ModBusData.PauseModbusMasterThread(); 
                 int count = 0;
                 while ((ModBusData.Th_mb_ReadDone == true) && (count<500))
                 {
@@ -139,7 +157,7 @@ namespace Robotic_Arm
                     ModBusData.Action_Jog(unit_id, axis, pos); //可能在送的時候會同時收會發生相撞
                     Thread.Sleep(10);//stanley沒加delay會無法寫
                 }
-                ModBusData.ResumeModbusMasterThread();
+                //ModBusData.ResumeModbusMasterThread();
 
             }
             else if (cbx_OPMode.Text == "P2P")
@@ -149,7 +167,7 @@ namespace Robotic_Arm
                 y = Convert.ToInt16(txb_TargetPosY.Text);
                 z = Convert.ToInt16(txb_TargetPosZ.Text);
 
-                ModBusData.PauseModbusMasterThread();
+                //ModBusData.PauseModbusMasterThread();
                 int count = 0;
                 while ((ModBusData.Th_mb_ReadDone == true) && (count < 500))
                 {
@@ -167,10 +185,7 @@ namespace Robotic_Arm
         }
         private void Dis_Timer_Fun(object sender, EventArgs e)
         {
-            //Read from slave
-            byte id = 10;
 
-            
             //ModBusData.ModbusRTUMaster_ReadRegister(id);
 
             //current pos
@@ -183,20 +198,14 @@ namespace Robotic_Arm
             //Error State
             //txB_ERRSTATE.Text = String.Format("0x{0:X}", ModBusData.Err_State);
             txB_ERRSTATE.Text = String.Format("{0}", ModBusData.Err_State);
-            //current velocity
-            TextBox[] txb_Vel = new TextBox[] { textBox8, textBox9, textBox10, textBox11, textBox12, textBox13, textBox14 };
-            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
-            {
-                //txb_Vel[i].Text = String.Format("0x{0:X}", ModBusData.VelValue[i]);
-                txb_Vel[i].Text = String.Format("{0}", ModBusData.VelValue[i]);
-            }
+            
 
-            TextBox[] tar_pos = new TextBox[] { textBox16, textBox17, textBox18, textBox19, textBox20, textBox21, textBox22 };
-            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
-            {
-                //txb_Vel[i].Text = String.Format("0x{0:X}", ModBusData.VelValue[i]);
-                tar_pos[i].Text = String.Format("{0}", ModBusData.TarPos[i]);
-            }
+            //TextBox[] tar_pos = new TextBox[] { textBox16, textBox17, textBox18, textBox19, textBox20, textBox21, textBox22 };
+            //for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
+            //{
+            //    //txb_Vel[i].Text = String.Format("0x{0:X}", ModBusData.VelValue[i]);
+            //    tar_pos[i].Text = String.Format("{0}", ModBusData.TarPos[i]);
+            //}
 
 
 
@@ -224,6 +233,33 @@ namespace Robotic_Arm
         private void Robotic_Arm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ModBusData.EndModbusMasterThread();
+        }
+
+        private void BTN_STATUS_Click(object sender, EventArgs e)
+        {
+           ModBusData.ModbusRTUMaster_ReadRegister(10);
+        }
+
+        private void BTN_MULTI_JOG_Click(object sender, EventArgs e)
+        {
+            ushort[] tar_pos = new ushort[RobotArmControl.cModBusData.DEF_MAX_AXIS];
+            ushort[] tar_vel = new ushort[RobotArmControl.cModBusData.DEF_MAX_AXIS];
+
+            TextBox[] text_tar_pos = new TextBox[] { textBox16, textBox17, textBox18, textBox19, textBox20, textBox21, textBox22 };
+            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
+            {
+                tar_pos[i]= Convert.ToUInt16(text_tar_pos[i].Text);       
+            }
+
+            TextBox[] text_tar_vel = new TextBox[] { textBox8, textBox9, textBox10, textBox11, textBox12, textBox13, textBox14 };
+            for (int i = 0; i < RobotArmControl.cModBusData.DEF_MAX_AXIS; i++)
+            {
+                tar_vel[i] = Convert.ToUInt16(text_tar_vel[i].Text);
+            }
+
+
+
+            ModBusData.Action_Multi_Jog(10, tar_pos, tar_vel); //一次下7軸
         }
 
  

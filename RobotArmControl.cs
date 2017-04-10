@@ -58,34 +58,29 @@ namespace RobotArmControl
 	        DEF_INX_TARPOS6,
 	        DEF_INX_TARPOS7,
 
-	        DEF_INX_POSVAL1=13,
-	        DEF_INX_POSVAL2,
-	        DEF_INX_POSVAL3,
-	        DEF_INX_POSVAL4,
-	        DEF_INX_POSVAL5,
-	        DEF_INX_POSVAL6,
-	        DEF_INX_POSVAL7,
+	        DEF_INX_TARVEL1=13,
+            DEF_INX_TARVEL2,
+            DEF_INX_TARVEL3,
+            DEF_INX_TARVEL4,
+            DEF_INX_TARVEL5,
+            DEF_INX_TARVEL6,
+            DEF_INX_TARVEL7,
 
-	        DEF_INX_VELVAL1=20,
-	        DEF_INX_VELVAL2,
-	        DEF_INX_VELVAL3,
-	        DEF_INX_VELVAL4,
-	        DEF_INX_VELVAL5,
-	        DEF_INX_VELVAL6,
-	        DEF_INX_VELVAL7,
+            DEF_INX_POSVAL1 = 20,
+            DEF_INX_POSVAL2,
+            DEF_INX_POSVAL3,
+            DEF_INX_POSVAL4,
+            DEF_INX_POSVAL5,
+            DEF_INX_POSVAL6,
+            DEF_INX_POSVAL7,
 
-	        DEF_INX_ERR_STATUS,
+	        DEF_INX_ERR_STATE,
 	        DEF_INX_STATE
         };
 
         //==
         //Modbus struct
         //==
-        //Input register  0~14 
-        public UInt16[] PosVal = new UInt16[DEF_MAX_AXIS];
-        public UInt16[] VelValue = new UInt16[DEF_MAX_AXIS];
-        public UInt16 Err_State = 0;
-
         //Holding register  0~5
         public Int16 TargetPosX;
         public Int16 TargetPosY;
@@ -93,6 +88,10 @@ namespace RobotArmControl
         public Int16 OPMode;       //P2P
         public float SpeedRatio; //0~1
         public UInt16[] TarPos = new UInt16[DEF_MAX_AXIS];
+        public UInt16[] TarVel = new UInt16[DEF_MAX_AXIS];
+        public UInt16[] PosVal = new UInt16[DEF_MAX_AXIS];
+        public UInt16 Err_State = 0;
+
 
         ModbusMasterSerial mm;
 
@@ -106,7 +105,7 @@ namespace RobotArmControl
         public cModBusData()
         {
             // Crete instance of modbus serial RTU (replace COMx with a free serial port - ex. COM5)
-            mm = new ModbusMasterSerial(ModbusSerialType.RTU, "COM8", 115200, 8, Parity.None, StopBits.One, Handshake.None);
+            mm = new ModbusMasterSerial(ModbusSerialType.RTU, "COM8", 460800, 8, Parity.None, StopBits.One, Handshake.None);
             // Exec the connection
             mm.Connect();
 
@@ -238,9 +237,8 @@ namespace RobotArmControl
 
             for (byte i = 0; i < DEF_MAX_AXIS; i++)
             {
-                TarPos[i] = HoldReg_array[6 + i];
-                PosVal[i] = HoldReg_array[13 + i];
-                VelValue[i] = HoldReg_array[20 + i];
+                //TarPos[i] = HoldReg_array[6 + i];
+                PosVal[i] = HoldReg_array[Convert.ToUInt16(eMbData.DEF_INX_POSVAL1 + i)];
             }
 
             Err_State = HoldReg_array[27];
@@ -261,6 +259,23 @@ namespace RobotArmControl
             address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_OPMODE);
             mm.WriteSingleRegister(unit_id, address, Convert.ToUInt16(eOPMode.JOG));
         }
+
+        public void Action_Multi_Jog(byte unit_id, ushort[] pos,ushort[] vel) //一次下7軸
+        {
+            
+            ushort address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_TARPOS1);
+
+            mm.WriteMultipleRegisters(unit_id, address,pos);
+            Thread.Sleep(10);
+
+            address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_TARVEL1);
+            mm.WriteMultipleRegisters(unit_id, address, vel);
+            Thread.Sleep(10);
+
+            address = Convert.ToUInt16(REG_HOLDING_START + eMbData.DEF_INX_OPMODE);
+            mm.WriteSingleRegister(unit_id, address, Convert.ToUInt16(eOPMode.JOG));
+        }
+
 
         public void Action_P2P(byte unit_id, ushort x, ushort y, ushort z)
         {

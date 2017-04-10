@@ -86,11 +86,13 @@
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
+            this.BTN_STATUS = new System.Windows.Forms.Button();
+            this.BTN_MULTI_JOG = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTN_SEND
             // 
-            this.BTN_SEND.Location = new System.Drawing.Point(335, 237);
+            this.BTN_SEND.Location = new System.Drawing.Point(361, 316);
             this.BTN_SEND.Name = "BTN_SEND";
             this.BTN_SEND.Size = new System.Drawing.Size(163, 46);
             this.BTN_SEND.TabIndex = 0;
@@ -312,7 +314,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(31, 264);
+            this.label14.Location = new System.Drawing.Point(192, 234);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(27, 12);
             this.label14.TabIndex = 28;
@@ -320,7 +322,7 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(66, 260);
+            this.textBox8.Location = new System.Drawing.Point(227, 230);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 22);
             this.textBox8.TabIndex = 27;
@@ -328,7 +330,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(31, 293);
+            this.label15.Location = new System.Drawing.Point(192, 263);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 12);
             this.label15.TabIndex = 30;
@@ -336,7 +338,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(66, 289);
+            this.textBox9.Location = new System.Drawing.Point(227, 259);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 22);
             this.textBox9.TabIndex = 29;
@@ -344,7 +346,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(31, 322);
+            this.label16.Location = new System.Drawing.Point(192, 292);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(27, 12);
             this.label16.TabIndex = 32;
@@ -352,7 +354,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(66, 318);
+            this.textBox10.Location = new System.Drawing.Point(227, 288);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(100, 22);
             this.textBox10.TabIndex = 31;
@@ -360,7 +362,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(31, 351);
+            this.label17.Location = new System.Drawing.Point(192, 321);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(27, 12);
             this.label17.TabIndex = 34;
@@ -368,7 +370,7 @@
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(66, 347);
+            this.textBox11.Location = new System.Drawing.Point(227, 317);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(100, 22);
             this.textBox11.TabIndex = 33;
@@ -376,7 +378,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(31, 380);
+            this.label18.Location = new System.Drawing.Point(192, 350);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(27, 12);
             this.label18.TabIndex = 36;
@@ -384,7 +386,7 @@
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(66, 376);
+            this.textBox12.Location = new System.Drawing.Point(227, 346);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(100, 22);
             this.textBox12.TabIndex = 35;
@@ -392,7 +394,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(31, 409);
+            this.label19.Location = new System.Drawing.Point(192, 379);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(27, 12);
             this.label19.TabIndex = 38;
@@ -400,7 +402,7 @@
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(66, 405);
+            this.textBox13.Location = new System.Drawing.Point(227, 375);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(100, 22);
             this.textBox13.TabIndex = 37;
@@ -408,7 +410,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(32, 438);
+            this.label20.Location = new System.Drawing.Point(193, 408);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(27, 12);
             this.label20.TabIndex = 40;
@@ -416,7 +418,7 @@
             // 
             // textBox14
             // 
-            this.textBox14.Location = new System.Drawing.Point(65, 434);
+            this.textBox14.Location = new System.Drawing.Point(226, 404);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(100, 22);
             this.textBox14.TabIndex = 39;
@@ -424,7 +426,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(332, 204);
+            this.label21.Location = new System.Drawing.Point(341, 284);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(37, 12);
             this.label21.TabIndex = 41;
@@ -434,14 +436,14 @@
             // 
             this.cbx_JOGAXIS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_JOGAXIS.FormattingEnabled = true;
-            this.cbx_JOGAXIS.Location = new System.Drawing.Point(375, 201);
+            this.cbx_JOGAXIS.Location = new System.Drawing.Point(384, 281);
             this.cbx_JOGAXIS.Name = "cbx_JOGAXIS";
             this.cbx_JOGAXIS.Size = new System.Drawing.Size(67, 20);
             this.cbx_JOGAXIS.TabIndex = 42;
             // 
             // textBox15
             // 
-            this.textBox15.Location = new System.Drawing.Point(448, 199);
+            this.textBox15.Location = new System.Drawing.Point(457, 279);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(67, 22);
             this.textBox15.TabIndex = 43;
@@ -558,11 +560,33 @@
             this.textBox22.Size = new System.Drawing.Size(100, 22);
             this.textBox22.TabIndex = 44;
             // 
+            // BTN_STATUS
+            // 
+            this.BTN_STATUS.Location = new System.Drawing.Point(12, 252);
+            this.BTN_STATUS.Name = "BTN_STATUS";
+            this.BTN_STATUS.Size = new System.Drawing.Size(85, 52);
+            this.BTN_STATUS.TabIndex = 58;
+            this.BTN_STATUS.Text = "Status";
+            this.BTN_STATUS.UseVisualStyleBackColor = true;
+            this.BTN_STATUS.Click += new System.EventHandler(this.BTN_STATUS_Click);
+            // 
+            // BTN_MULTI_JOG
+            // 
+            this.BTN_MULTI_JOG.Location = new System.Drawing.Point(173, 432);
+            this.BTN_MULTI_JOG.Name = "BTN_MULTI_JOG";
+            this.BTN_MULTI_JOG.Size = new System.Drawing.Size(110, 30);
+            this.BTN_MULTI_JOG.TabIndex = 59;
+            this.BTN_MULTI_JOG.Text = "MultiJog";
+            this.BTN_MULTI_JOG.UseVisualStyleBackColor = true;
+            this.BTN_MULTI_JOG.Click += new System.EventHandler(this.BTN_MULTI_JOG_Click);
+            // 
             // Robotic_Arm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 471);
+            this.Controls.Add(this.BTN_MULTI_JOG);
+            this.Controls.Add(this.BTN_STATUS);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label24);
@@ -690,6 +714,8 @@
         private System.Windows.Forms.TextBox textBox20;
         private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.Button BTN_STATUS;
+        private System.Windows.Forms.Button BTN_MULTI_JOG;
     }
 }
 
