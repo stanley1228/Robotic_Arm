@@ -1,0 +1,14 @@
+D:\Sincronia\SkyDrive\Files\Lavoro\Progetti\Visual Studio\Modbus\Modbus\bin\Debug\Modbus.dll
+D:\Sincronia\SkyDrive\Files\Lavoro\Progetti\Visual Studio\Modbus\Modbus\bin\Debug\Modbus.pdb
+D:\Sincronia\SkyDrive\Files\Lavoro\Progetti\Visual Studio\Modbus\Modbus\obj\Debug\Modbus.dll
+D:\Sincronia\SkyDrive\Files\Lavoro\Progetti\Visual Studio\Modbus\Modbus\obj\Debug\Modbus.pdb
+D:\Sincronia\SkyDrive\Files\Lavoro\Progetti\Visual Studio\Modbus\Modbus\obj\Debug\Modbus.csprojResolveAssemblyReference.cache
+D:\Code_Visual_C_Sharp\modbus_v1_0_2_0.src.bin\Modbus\bin\Debug\Modbus.dll
+D:\Code_Visual_C_Sharp\modbus_v1_0_2_0.src.bin\Modbus\bin\Debug\Modbus.pdb
+D:\Code_Visual_C_Sharp\modbus_v1_0_2_0.src.bin\Modbus\obj\Debug\Modbus.csprojResolveAssemblyReference.cache
+D:\Code_Visual_C_Sharp\modbus_v1_0_2_0.src.bin\Modbus\obj\Debug\Modbus.dll
+D:\Code_Visual_C_Sharp\modbus_v1_0_2_0.src.bin\Modbus\obj\Debug\Modbus.pdb
+D:\Code_Visual_C_Sharp\Robotic_Arm\Modbus\bin\Debug\Modbus.dll
+D:\Code_Visual_C_Sharp\Robotic_Arm\Modbus\bin\Debug\Modbus.pdb
+D:\Code_Visual_C_Sharp\Robotic_Arm\Modbus\obj\Debug\Modbus.dll
+D:\Code_Visual_C_Sharp\Robotic_Arm\Modbus\obj\Debug\Modbus.pdb
