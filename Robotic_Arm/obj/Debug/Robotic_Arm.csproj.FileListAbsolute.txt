@@ -1,0 +1,10 @@
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.Robotic_Arm.resources
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.Properties.Resources.resources
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.csproj.GenerateResource.Cache
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\bin\Debug\Robotic_Arm.exe
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\bin\Debug\Robotic_Arm.pdb
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\bin\Debug\Modbus.dll
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\bin\Debug\Modbus.pdb
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.csprojResolveAssemblyReference.cache
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.exe
+D:\Code_Visual_C_Sharp\Robotic_Arm\Robotic_Arm\obj\Debug\Robotic_Arm.pdb
